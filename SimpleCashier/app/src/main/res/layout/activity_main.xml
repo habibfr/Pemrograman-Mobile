@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/purple_500"
+        android:padding="10dp"
+        android:text="Simple Cashier"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Harga"
+        />
+    <EditText
+        android:text="0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:textAlignment="center"
+        android:id="@+id/harga"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Es Teh"
+            android:layout_weight="0.5"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="15dp"
+            android:layout_margin="10dp"
+            android:id="@+id/teh"
+            android:onClick="bayarTeh"
+            />
+
+        <Button
+            android:id="@+id/jeruk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="bayarJeruk"
+            android:layout_weight="0.5"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="15dp"
+            android:layout_margin="10dp"
+            android:text="Es Jeruk" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nasi Pecel"
+            android:layout_weight="0.5"
+            android:paddingHorizontal="23dp"
+            android:paddingVertical="15dp"
+            android:layout_margin="10dp"
+            android:id="@+id/pecel"
+            android:onClick="bayarPecel"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nasi Rawon"
+            android:layout_weight="0.5"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="15dp"
+            android:layout_margin="10dp"
+            android:id="@+id/rawon"
+            android:onClick="bayarRawon"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bayar"
+            android:layout_weight="0.5"
+            android:paddingHorizontal="45dp"
+            android:paddingVertical="15dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/green"
+            android:id="@+id/bayar"
+            android:onClick="bayarBtn"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Batal"
+            android:layout_weight="0.5"
+            android:paddingHorizontal="45dp"
+            android:paddingVertical="15dp"
+            android:layout_margin="10dp"
+            android:id="@+id/batal"
+            android:backgroundTint="@color/red"
+            android:onClick="cancelBtn"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About me"
+        android:layout_margin="10dp"
+        android:padding="13dp"
+        />
+
+
+</LinearLayout>
