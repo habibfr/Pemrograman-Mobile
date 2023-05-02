@@ -23,6 +23,8 @@
                 android:id="@+id/editTgl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+
         </TableRow>
 
         <TableRow>
@@ -33,7 +35,6 @@
 
             <EditText
                 android:id="@+id/editUraian"
-                android:textSize="15sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </TableRow>
