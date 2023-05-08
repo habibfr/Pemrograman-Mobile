@@ -90,35 +90,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnTambah.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // on below line we are getting text from edit text
-                String tgl = editTgl.getText().toString();
-                String uraian = editUraian.getText().toString().trim();
-//                int harga = Integer.parseInt(editHarga.getText().toString());
-                String harga = editHarga.getText().toString().trim();
-                String jenis = spinner.getSelectedItem().toString();
-
-                // on below line we are checking if item is not empty
-                if (!tgl.isEmpty() && !uraian.isEmpty() && !jenis.isEmpty() && !harga.isEmpty()) {
-
-                    // on below line we are adding item to our list.
-                    listTrx.add(new DataTrx(tgl, uraian, jenis,  Integer.parseInt(harga)));
-
-                    // on below line we are notifying adapter
-                    // that data in list is updated to
-                    // update our list view.
-                    Toast.makeText(MainActivity.this, "Berhasil menambahkan data!",
-                            Toast.LENGTH_LONG).show();
-                    customAdapter.notifyDataSetChanged();
-                    reset();
-                }else {
-                    Toast.makeText(MainActivity.this, "Gagal menambahkan data!",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
         btnReport.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -32,20 +32,6 @@ public class Laporan extends AppCompatActivity {
 //
 //        laporan.setText(mylist.get(0).getJenis());
 
-        for (int i = 0; i < trx.size(); i++) {
-            if(trx.get(i).getJenis().equalsIgnoreCase("Kredit")){
-                pengeluaran += trx.get(i).getHarga();
-            }else {
-                pemasukan += trx.get(i).getHarga();
-            }
-        }
-
-        saldo = pemasukan - pengeluaran;
-
-        txtPemasukan.setText("Pemasukan : " + pemasukan.toString());
-        txtPengeluaran.setText("Pengeluaran : " + pengeluaran.toString());
-        txtSaldo.setText("Saldo Akhir : " + saldo);
-
         btnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
