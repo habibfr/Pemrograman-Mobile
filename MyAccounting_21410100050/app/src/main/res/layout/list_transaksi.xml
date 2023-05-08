@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableRow android:padding="10dp">
+            <TextView
+                android:id="@+id/txtRound"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_round"
+                android:gravity="center"
+                android:text="K"
+                android:textColor="#333333"
+                android:textSize="20sp"/>
+
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txtTgl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="10-11-2002"/>
+
+
+                <TextView
+                    android:id="@+id/txtUraian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Membeli buku belajar koding"/>
+                <TextView
+                    android:id="@+id/txtHarga"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="Rp. 20999"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/hapus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="10dp"
+                android:text="Hapus"/>
+        </TableRow>
+    </TableLayout>
+
+
+
+</RelativeLayout>
