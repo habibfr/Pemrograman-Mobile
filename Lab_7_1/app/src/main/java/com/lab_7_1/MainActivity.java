@@ -12,16 +12,16 @@ public class MainActivity extends AppCompatActivity {
 
     private GridView gvMy, selectedImage;
     private int[] logos = {
-            R.drawable.ad,
-            R.drawable.ae,
-            R.drawable.af,
-            R.drawable.ag,
-            R.drawable.ai,
-            R.drawable.al,
-            R.drawable.am,
-            R.drawable.ao,
-            R.drawable.aq,
-            R.drawable.ar,
+            R.drawable.banana,
+            R.drawable.bread,
+            R.drawable.burger,
+            R.drawable.cocktail,
+            R.drawable.coffee,
+            R.drawable.donuts,
+            R.drawable.fish,
+            R.drawable.pizza,
+            R.drawable.ramen,
+            R.drawable.watermelon,
             R.drawable.jk,
     };
 

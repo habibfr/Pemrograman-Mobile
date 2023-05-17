@@ -12,7 +12,7 @@
         android:id="@+id/gvMy"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:numColumns="3"
+        android:numColumns="2"
         android:padding="1dp"
         />
 
