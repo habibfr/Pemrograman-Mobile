@@ -27,4 +27,12 @@ public class Contact implements Serializable {
     public String getNoHp() {
         return noHp;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNoHp(String noHp) {
+        this.noHp = noHp;
+    }
 }

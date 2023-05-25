@@ -28,6 +28,16 @@
         android:layout_height="wrap_content"
         android:text="Tambah Contact" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:text="List Contact"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <ListView
         android:id="@+id/lvContacs"
         android:layout_width="wrap_content"
@@ -35,10 +45,9 @@
 
     <GridView
         android:id="@+id/gvContacts"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="2"
         android:padding="1dp" />
-
 
 </LinearLayout>

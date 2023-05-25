@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         lvContacts = findViewById(R.id.lvContacs);
         gvContacts = findViewById(R.id.gvContacts);
         btnTambahContact = findViewById(R.id.btnTambahContact);
@@ -40,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
         editNoHp = findViewById(R.id.editNoHp);
 
         contactHandler = new ContactHandler(MainActivity.this);
-        listContact = contactHandler.getAllContacts();
-
-        contactAdapter = new ContactAdapter(getApplicationContext(), listContact);
+//        listContact = contactHandler.getAllContacts();
+//
+//        contactAdapter = new ContactAdapter(getApplicationContext(), listContact);
+//        gvContacts.setAdapter(contactAdapter);
 //        lvContacts.setAdapter(contactAdapter);
-        gvContacts.setAdapter(contactAdapter);
 
         btnTambahContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,15 +53,15 @@ public class MainActivity extends AppCompatActivity {
                 String name = editName.getText().toString();
                 String noHp = editNoHp.getText().toString();
 
-                if(name.trim().isEmpty() || noHp.trim().isEmpty()){
+                if (name.trim().isEmpty() || noHp.trim().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Harap isi field dengan benar", Toast.LENGTH_LONG).show();
-                return;
+                    return;
                 }
 
                 contactHandler.addContact(name, noHp);
                 // after adding the data we are displaying a toast message.
                 Toast.makeText(getApplicationContext(), "Contact has been added.", Toast.LENGTH_SHORT).show();
-
+                listContact.clear();
                 listContact = contactHandler.getAllContacts();
                 contactAdapter = new ContactAdapter(getApplicationContext(), listContact);
                 contactAdapter.notifyDataSetChanged();
@@ -78,5 +79,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listContact.clear();
+        listContact = contactHandler.getAllContacts();
+        contactAdapter = new ContactAdapter(getApplicationContext(), listContact);
+        contactAdapter.notifyDataSetChanged();
+        gvContacts.setAdapter(contactAdapter);
     }
 }
