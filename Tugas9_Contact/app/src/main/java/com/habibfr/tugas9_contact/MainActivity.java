@@ -70,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        gvContacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, ActionActivity.class);
+                intent.putExtra("contact", (Serializable) listContact.get(i));
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
