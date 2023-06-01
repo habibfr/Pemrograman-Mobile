@@ -65,7 +65,7 @@ public class FragmentBeranda extends Fragment {
                 if (i == 2) {
                     Intent intent = new Intent(getContext(), GoFoodActivity.class);
                     startActivity(intent);
-                    Toast.makeText(adapterView.getContext(), "t " + i, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(adapterView.getContext(), "t " + i, Toast.LENGTH_SHORT).show();
                 }
             }
         });
