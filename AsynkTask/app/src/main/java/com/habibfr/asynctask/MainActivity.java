@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Order> ordersList = new ArrayList<>();
     ListView lvOrders;
     OrderAdapter orderAdapter;
+    TextView txtJson;
 
     private static final String API_URL = "http://172.16.41.60/pbm/fetch_data.php";
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lvOrders = findViewById(R.id.lvOrders);
+        txtJson = findViewById(R.id.txtJson);
 
         Async a = new Async();
         a.execute("");
@@ -45,25 +48,29 @@ public class MainActivity extends AppCompatActivity {
             String data = "";
             try {
 
-                URL url = new URL(API_URL);
+                data = downloadUrl(API_URL);
 
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.connect();
 
-                int responsecode = conn.getResponseCode();
-
-                if (responsecode != 200) {
-                    throw new RuntimeException("HttpResponseCode: " + responsecode);
-                } else {
-                    StringBuilder inline = new StringBuilder();
-                    Scanner scanner = new Scanner(url.openStream());
-                    while (scanner.hasNext()) {
-                        inline.append(scanner.nextLine());
-                    }
-                    data = inline.toString();
-                    scanner.close();
-                }
+                // is my code habibfr
+//                URL url = new URL(API_URL);
+//
+//                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//                conn.setRequestMethod("GET");
+//                conn.connect();
+//
+//                int responsecode = conn.getResponseCode();
+//
+//                if (responsecode != 200) {
+//                    throw new RuntimeException("HttpResponseCode: " + responsecode);
+//                } else {
+//                    StringBuilder inline = new StringBuilder();
+//                    Scanner scanner = new Scanner(url.openStream());
+//                    while (scanner.hasNext()) {
+//                        inline.append(scanner.nextLine());
+//                    }
+//                    data = inline.toString();
+//                    scanner.close();
+//                }
             } catch (Exception e) {
                 Log.d("Background Task", e.toString());
             }
@@ -88,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 orderAdapter = new OrderAdapter(getApplicationContext(), ordersList);
                 orderAdapter.notifyDataSetChanged();
                 lvOrders.setAdapter(orderAdapter);
+                txtJson.setText(result.toString());
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }

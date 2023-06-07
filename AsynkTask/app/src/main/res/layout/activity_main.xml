@@ -7,12 +7,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
+    <TextView
+        android:id="@+id/txtJson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
     <ListView
         android:id="@+id/lvOrders"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
