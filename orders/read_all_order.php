@@ -1,6 +1,6 @@
 <?php
 
-include "database/db_config.php";
+include "../database/db_config.php";
 
 $sql = "SELECT * FROM myOrder_21410100050";
 

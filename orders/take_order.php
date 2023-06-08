@@ -1,8 +1,8 @@
 <?php
 
-include "database/db_config.php";
+include "../database/db_config.php";
 
-if (isset($_POST["simpan"])) {
+if (isset($_POST["item"])) {
   $response = array();
 
   $item = $_POST["item"];
@@ -22,6 +22,7 @@ if (isset($_POST["simpan"])) {
   }
 
   echo json_encode($response);
+  exit();
 
   // if($result){
   //   $_SESSION["alert"] = [
