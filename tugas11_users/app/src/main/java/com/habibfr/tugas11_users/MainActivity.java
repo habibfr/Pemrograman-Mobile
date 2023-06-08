@@ -47,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
         txtStatus = findViewById(R.id.txtStatus);
         txtStatusLogin = findViewById(R.id.txtStatusLogin);
 
-//        txtStatus.setText(status);
-//        txtStatusLogin.setText(status);
-
         btnRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 String query3 = editPasswordRegis.getText().toString();
 
                 Uri.Builder builder = new Uri.Builder().appendQueryParameter("nama", query1).appendQueryParameter("username", query2).appendQueryParameter("password", query3);
-                new KonektorT("http://192.168.43.37/pbm/users/add_user.php", builder).execute();
+                new Konektor("http://192.168.43.37/pbm/users/add_user.php", builder).execute();
 //                txtStatus.setText(status);
                 txtStatusLogin.setVisibility(View.GONE);
-                txtStatusLogin.setText("");
                 txtStatus.setVisibility(View.VISIBLE);
+                reset();
             }
 
         });
@@ -73,22 +70,25 @@ public class MainActivity extends AppCompatActivity {
                 String query1 = editUsernameLogin.getText().toString();
                 String query2 = editPasswordLogin.getText().toString();
 
-                new KonektorT("http://192.168.43.37/pbm/users/cek_login.php", new Uri.Builder().appendQueryParameter("username", query1).appendQueryParameter("password", query2)).execute();
-
-
-//                txtStatusLogin.setText(status);
-
+                new Konektor("http://192.168.43.37/pbm/users/cek_login.php", new Uri.Builder().appendQueryParameter("username", query1).appendQueryParameter("password", query2)).execute();
                 txtStatus.setVisibility(View.GONE);
-
-                txtStatus.setText("");
                 txtStatusLogin.setVisibility(View.VISIBLE);
+                reset();
             }
         });
 
 
     }
 
-    public class KonektorT extends AsyncTask<String, String, String> {
+    private void reset(){
+        editNameRegis.setText("");
+        editUsernameRegis.setText("");
+        editPasswordRegis.setText("");
+        editUsernameLogin.setText("");
+        editPasswordLogin.setText("");
+    }
+
+    private class Konektor extends AsyncTask<String, String, String> {
         private static final int READ_TIMEOUT = 15000;
         private static final int CONNECTION_TIMEUT = 10000;
         Context context;
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         Uri.Builder builder;
 
 
-        public KonektorT(String situs, Uri.Builder builder) {
+        public Konektor(String situs, Uri.Builder builder) {
             this.situs = situs;
             this.builder = builder;
         }
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (MalformedURLException e) {
 //            throw new RuntimeException(e);
                 e.printStackTrace();
-                System.out.println("gagal1");
+                System.out.println("gagal 1");
                 return e.getMessage();
             }
 
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 //                Uri.Builder builder = new Uri.Builder().appendQueryParameter("nama", p1).appendQueryParameter("username", p2).appendQueryParameter("password", p3);
                 String query = builder.build().getEncodedQuery();
                 OutputStream outputStream = conn.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 bufferedWriter.write(query);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -149,14 +149,14 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("yourLink?" + query);
 
             } catch (IOException e) {
-                System.out.println("gagal2");
+                System.out.println("gagal 2");
                 throw new RuntimeException(e);
             }
 
             try {
                 int response_code = conn.getResponseCode();
                 if (response_code != HttpURLConnection.HTTP_OK) {
-                    System.out.println("gagl3");
+                    System.out.println("gagal 3");
                     return ("Connection error");
                 } else {
                     InputStream input = conn.getInputStream();
@@ -179,13 +179,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-//            if (!s.isEmpty()) {
             pdLoading.dismiss();
             txtStatus.setText(s.toString());
             txtStatusLogin.setText(s.toString());
-//                System.out.println(s);
-//                status = s.toString();
-//            }
         }
     }
 
