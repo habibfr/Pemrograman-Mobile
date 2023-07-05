@@ -2,35 +2,35 @@
 
 include "../database/db_config.php";
 
-if (isset($_POST["simpan"])) {
-  $response = array();
+// if (isset($_POST["simpan"])) {
+//   $response = array();
 
-  if (isset($_POST["fullname"]) && isset($_POST["email"]) && isset($_POST["password"])) {
-    $fullname = $_POST["fullname"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+if (isset($_POST["fullname"]) && isset($_POST["email"]) && isset($_POST["password"])) {
+  $fullname = $_POST["fullname"];
+  $email = $_POST["email"];
+  $password = $_POST["password"];
 
-    if (empty(trim($fullname)) || empty(trim($email)) || empty(trim($password))) {
-      echo "please isi field";
-      exit();
-    }
-
-
-    $sql = "INSERT INTO `users` (`user_id`, `fullname`, `email`, `password`, `created_at`, `updated_at`) VALUES (NULL, '$fullname', '$email', '$password', current_timestamp(), current_timestamp())";
-    $result = mysqli_query($conn, $sql);
-
-    if ($result > 0) {
-      $response["success"] = 1;
-      $response["message"] = "success add user!";
-    } else {
-      $response["success"] = 0;
-      $response["message"] = "gagal add user!";
-    }
-
-    echo json_encode($response);
+  if (empty(trim($fullname)) || empty(trim($email)) || empty(trim($password))) {
+    echo "please isi field";
     exit();
   }
+
+
+  $sql = "INSERT INTO `users` (`user_id`, `fullname`, `email`, `password`, `created_at`, `updated_at`) VALUES (NULL, '$fullname', '$email', '$password', current_timestamp(), current_timestamp())";
+  $result = mysqli_query($conn, $sql);
+
+  if ($result > 0) {
+    $response["success"] = 1;
+    $response["message"] = "success add user!";
+  } else {
+    $response["success"] = 0;
+    $response["message"] = "gagal add user!";
+  }
+
+  echo json_encode($response);
+  exit();
 }
+// }
 ?>
 
 <!DOCTYPE html>
