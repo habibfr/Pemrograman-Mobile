@@ -2,13 +2,23 @@
 include '../database/db_config.php';
 
 if (isset($_POST['user_id'])) {
-    $user_id = $_POST['user_id'];
+    $user = $_POST['user_id'];
+    $tanggal = $_POST['tanggal'];
 
-    $querySQL = "SELECT * FROM `transactions` WHERE `user_id` = ? order by `date` ASC";
+    // diganti dengan bulan
+    // if ($_POST['tanggal'] != "null") {
+    $querySQL = "SELECT * FROM `transactions` WHERE user_id=? AND DATE_FORMAT(date, '%Y-%m') = DATE_FORMAT(?, '%Y-%m') ORDER BY date DESC";
+    // } else {
+    //     $querySQL = "SELECT * FROM `transactions` WHERE user_id=? AND DATE_FORMAT(date, '%Y-%m') = DATE_FORMAT(CURRENT_DATE, '%Y-%m') ORDER BY date DESC";
+    // }
     $stmt = $conn->prepare($querySQL);
-    $stmt->bind_param('i', $user_id);
 
     if ($stmt) {
+        // if ($_POST['tanggal'] != "null") {
+        $stmt->bind_param('is', $user, $tanggal);
+        // } else {
+        //     $stmt->bind_param('i', $user);
+        // }
         $stmt->execute();
 
         $result = $stmt->get_result();
@@ -26,7 +36,7 @@ if (isset($_POST['user_id'])) {
         } else {
             $myObj = new stdClass();
             $myObj->status = 0;
-            $myObj->message = "Transaksi gagal";
+            $myObj->message = "Tidak ada transaksi";
         }
     } else {
         $myObj = new stdClass();
@@ -36,27 +46,6 @@ if (isset($_POST['user_id'])) {
 } else {
     $myObj = new stdClass();
     $myObj->status = 0;
-    $myObj->message = "Parameter yang dibutuhkan kurang";
+    $myObj->message = "Gagal mencari transaksi. Parameter yang dibutuhkan tidak ada";
 }
 echo json_encode($myObj);
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <form action="" method="post">
-        <input type="text" name="user_id">
-        <input type="submit" value="submit">
-    </form>
-</body>
-
-</html>

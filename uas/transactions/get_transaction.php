@@ -5,7 +5,7 @@ if (isset($_POST['user_id'], $_POST['transaction_id'])) {
     $user = $_POST['user_id'];
     $transaction_id = $_POST['transaction_id'];
 
-    $querySQL = "SELECT * FROM `transactions` WHERE `user_id`=? AND `transaction_id`=?";
+    $querySQL = "SELECT transaction_id, user_id, title, date, type, amount, additional_info, COALESCE(additional_info, 'Kosong'), created_at  FROM `transactions` WHERE `user_id`=? AND `transaction_id`=?";
     $stmt = $conn->prepare($querySQL);
 
     if ($stmt) {

@@ -2,13 +2,14 @@
 include '../database/db_config.php';
 
 if (isset($_POST['user_id'])) {
-    $user_id = $_POST['user_id'];
+    $user = $_POST['user_id'];
 
-    $querySQL = "SELECT * FROM `transactions` WHERE `user_id` = ? order by `date` ASC";
+    // cari transaksi hari ini
+    $querySQL = "SELECT transaction_id, user_id, title, date, type, amount, COALESCE(additional_info, 'Kosong'), created_at FROM `transactions` WHERE user_id = 1 AND DATE_FORMAT(date, '%d') = DATE_FORMAT(CURRENT_DATE, '%d') ORDER BY date DESC";
     $stmt = $conn->prepare($querySQL);
-    $stmt->bind_param('i', $user_id);
 
     if ($stmt) {
+        $stmt->bind_param('i', $user);
         $stmt->execute();
 
         $result = $stmt->get_result();
@@ -26,7 +27,7 @@ if (isset($_POST['user_id'])) {
         } else {
             $myObj = new stdClass();
             $myObj->status = 0;
-            $myObj->message = "Transaksi gagal";
+            $myObj->message = "Tidak ada transaksi";
         }
     } else {
         $myObj = new stdClass();
@@ -36,27 +37,6 @@ if (isset($_POST['user_id'])) {
 } else {
     $myObj = new stdClass();
     $myObj->status = 0;
-    $myObj->message = "Parameter yang dibutuhkan kurang";
+    $myObj->message = "Gagal mencari transaksi. Parameter yang dibutuhkan tidak ada";
 }
 echo json_encode($myObj);
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <form action="" method="post">
-        <input type="text" name="user_id">
-        <input type="submit" value="submit">
-    </form>
-</body>
-
-</html>
