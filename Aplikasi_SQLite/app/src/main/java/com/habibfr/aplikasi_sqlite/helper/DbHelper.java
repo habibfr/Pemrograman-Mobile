@@ -1,5 +1,6 @@
 package com.habibfr.aplikasi_sqlite.helper;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,15 +12,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
 
-    static final String DATABASE_NAME = "habibfr.jmp_db";
+    static final String DATABASE_NAME = "jmp.db";
+//    static final String DATABASE_NAME = "jmp_db";
 
-    public static final String TABLE_SQLite = "sqlite";
+    public static final String TABLE_SQLite = "kontak";
 
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_ADDRESS = "address";
+
+    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_SQLite + " ("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_NAME + " TEXT,"
+            + COLUMN_ADDRESS + " TEXT)";
 
     public DbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -27,23 +34,33 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-//        String SQL_CREATE_MOVIE_TABLE = "CREATE TABLE " + TABLE_SQLite + " ( " +
-//                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//                COLUMN_NAME + " TEXT NOT NULL, " +
-//                COLUMN_ADDRESS + " TEXT NOT NULL" + " )";
-//        System.out.println(SQL_CREATE_MOVIE_TABLE);
-
-        String query = "CREATE TABLE " + TABLE_SQLite + " ("
-                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_NAME + " TEXT NOT NULL,"
-                + COLUMN_ADDRESS + " TEXT NOT NULL)";
-
-        // at last we are calling a exec sql
-        // method to execute above sql query
-//        db.execSQL(query);
-
-        sqLiteDatabase.execSQL(query);
+        sqLiteDatabase.execSQL(CREATE_TABLE);
     }
+
+//    public DbHelper(@Nullable Context context) {
+//        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+//    }
+//
+//    @Override
+//    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+////        String SQL_CREATE_MOVIE_TABLE = "CREATE TABLE " + TABLE_SQLite + " ( " +
+////                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+////                COLUMN_NAME + " TEXT NOT NULL, " +
+////                COLUMN_ADDRESS + " TEXT NOT NULL" + " )";
+////        System.out.println(SQL_CREATE_MOVIE_TABLE);
+//
+//        String query = "CREATE TABLE " + TABLE_SQLite + " ("
+//                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+//                + COLUMN_NAME + " TEXT NOT NULL,"
+//                + COLUMN_ADDRESS + " TEXT NOT NULL)";
+//
+//        // at last we are calling a exec sql
+//        // method to execute above sql query
+////        db.execSQL(query);
+//
+//        sqLiteDatabase.execSQL(query);
+////        sqLiteDatabase.close();
+//    }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
@@ -74,12 +91,19 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public void insert(String name, String address) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String queryValues = "INSERT INTO " + TABLE_SQLite + "(name, address) " +
-                " VALUES ('" + name + "', '" + address + "')";
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        String queryValues = "INSERT INTO " + TABLE_SQLite + "(name, address) " +
+//                " VALUES ('" + name + "', '" + address + "')";
+//
+//        System.out.println("insert : " + queryValues);
+//        db.execSQL(queryValues);
+//        db.close();
 
-        System.out.println("insert : " + queryValues);
-        db.execSQL(queryValues);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME, name);
+        values.put(COLUMN_ADDRESS, address);
+        db.insert(TABLE_SQLite, null, values);
         db.close();
     }
 
